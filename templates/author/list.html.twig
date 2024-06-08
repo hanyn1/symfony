@@ -1,0 +1,24 @@
+{%  if list|length !=0 %}
+
+
+<table>
+<tr>
+<td>Id</td>
+<td>userName</td>
+<td>Email</td>
+<td>NumberOfBooks</td>
+<td>Image</td>
+</tr>
+{% for a in list  %}
+<tr>
+<td>{{a.id}}</td>
+<td>{{a.userName}}</td>
+<td>{{a.Email}}</td>
+<td>{{a.NumberOfBooks}}</td>
+<td><img   src="{{a.pictures}} "/></td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<h1>no auths</h1>
+{% enif %}
