@@ -1,24 +1,36 @@
-{%  if list|length !=0 %}
-
-
+{% if list|length!= 0 %}
 <table>
-<tr>
-<td>Id</td>
-<td>userName</td>
-<td>Email</td>
-<td>NumberOfBooks</td>
-<td>Image</td>
-</tr>
-{% for a in list  %}
-<tr>
-<td>{{a.id}}</td>
-<td>{{a.userName}}</td>
-<td>{{a.Email}}</td>
-<td>{{a.NumberOfBooks}}</td>
-<td><img   src="{{a.pictures}} "/></td>
-</tr>
-{% endfor %}
+    <tr>
+        <td>Id</td>
+        <td>User Name</td>
+        <td>Email</td>
+        <td>Number of Books</td>
+        <td>Image</td>
+    </tr>
+    {% for item in list %}
+    <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.username|upper }}</td>
+        <td>{{ item.email }}</td> <!-- Assuming email is stored in lowercase -->
+        <td>{{ item.nb_books }}</td>
+        <td><img src="{{ item.picture }}" alt="Book cover"></td>
+    </tr>
+    {% endfor %}
 </table>
 {% else %}
-<h1>no auths</h1>
-{% enif %}
+<h1>No authors available</h1>
+{% endif %}
+
+
+{% set totalAuthors = 0 %}
+{% for i in range(1, list|length + 1) %}
+    {% set totalAuthors = totalAuthors + loop.index0 + 1 %}
+{% endfor %}
+  <h1>Total number of authors: {{ list|length }}</h1>
+
+{% set totalBooks = 0 %}
+{% for author in list %}
+    {% set totalBooks = totalBooks + author.nb_books %}
+{% endfor %}
+
+<h1>Total number of books: {{ totalBooks }}</h1>
